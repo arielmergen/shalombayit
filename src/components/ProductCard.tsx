@@ -1,0 +1,66 @@
+import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+
+export interface Product {
+  id: string;
+  name: string;
+  category: string;
+  image: string;
+  attribute?: string;
+  price?: number;
+}
+
+interface ProductCardProps {
+  product: Product;
+}
+
+const WHATSAPP_NUMBER = "5491112345678";
+
+export const ProductCard = ({ product }: ProductCardProps) => {
+  const message = encodeURIComponent(`¡Hola! Me interesa consultar sobre: ${product.name}`);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+  return (
+    <article className="product-card group">
+      <div className="aspect-square overflow-hidden bg-muted">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      </div>
+
+      <div className="p-4 md:p-5">
+        <h3 className="font-display text-lg md:text-xl font-semibold text-foreground mb-1">
+          {product.name}
+        </h3>
+
+        {product.attribute && (
+          <p className="text-sm text-muted-foreground mb-3">
+            {product.attribute}
+          </p>
+        )}
+
+        <div className="flex items-center justify-between gap-3 mt-4">
+          <div className="min-h-[28px]">
+            {product.price !== undefined && (
+              <span className="font-display text-xl font-bold text-primary">
+                ${product.price.toLocaleString('es-AR')}
+              </span>
+            )}
+          </div>
+
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-whatsapp-outline text-sm px-4 py-2"
+          >
+            <WhatsAppIcon className="w-4 h-4" />
+            Consultar
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+};
