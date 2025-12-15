@@ -125,14 +125,16 @@
     @apply bg-[hsl(var(--whatsapp))] text-white font-semibold px-6 py-3 rounded-full 
            hover:bg-[hsl(var(--whatsapp-hover))] transition-all duration-300 
            shadow-lg hover:shadow-xl hover:-translate-y-0.5 
-           flex items-center gap-2;
+           flex items-center gap-2
+           focus:outline-none focus:ring-2 focus:ring-[hsl(var(--whatsapp))] focus:ring-offset-2;
   }
 
   .btn-whatsapp-outline {
     @apply border-2 border-[hsl(var(--whatsapp))] text-[hsl(var(--whatsapp))] 
            font-semibold px-4 py-2 rounded-full 
            hover:bg-[hsl(var(--whatsapp))] hover:text-white 
-           transition-all duration-300 flex items-center gap-2;
+           transition-all duration-300 flex items-center gap-2
+           focus:outline-none focus:ring-2 focus:ring-[hsl(var(--whatsapp))] focus:ring-offset-2;
   }
 
   .product-card {
@@ -154,11 +156,12 @@
   }
 
   .floating-whatsapp {
-    @apply fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full 
+    @apply fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-14 h-14 rounded-full 
            bg-[hsl(var(--whatsapp))] text-white shadow-2xl 
            flex items-center justify-center 
            hover:scale-110 transition-transform duration-300
-           animate-pulse-slow;
+           animate-pulse-slow
+           focus:outline-none focus:ring-2 focus:ring-[hsl(var(--whatsapp))] focus:ring-offset-2;
   }
 }
 
