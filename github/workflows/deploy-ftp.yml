@@ -1,0 +1,147 @@
+name: Deploy to FTP Server
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  workflow_dispatch:
+    inputs:
+      subdomain:
+        description: 'Subdomain (e.g., subdomain.shifrastudio.com.ar)'
+        required: true
+        type: string
+      server_dir:
+        description: 'FTP directory (e.g., /public_html/subdomain/)'
+        required: true
+        type: string
+      environment:
+        description: 'Environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
+          - preview
+
+jobs:
+  deploy:
+    name: Build and Deploy to FTP
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Determine deployment config
+        id: config
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Manual deployment - usar inputs
+            echo "subdomain=${{ github.event.inputs.subdomain }}" >> $GITHUB_OUTPUT
+            echo "server_dir=${{ github.event.inputs.server_dir }}" >> $GITHUB_OUTPUT
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+          else
+            # Auto deployment - usar mapeo por rama
+            if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+              echo "subdomain=${{ secrets.SUBDOMAIN_PRODUCTION }}" >> $GITHUB_OUTPUT
+              echo "server_dir=${{ secrets.FTP_SERVER_DIR_PRODUCTION }}" >> $GITHUB_OUTPUT
+              echo "environment=production" >> $GITHUB_OUTPUT
+            elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+              echo "subdomain=${{ secrets.SUBDOMAIN_STAGING }}" >> $GITHUB_OUTPUT
+              echo "server_dir=${{ secrets.FTP_SERVER_DIR_STAGING }}" >> $GITHUB_OUTPUT
+              echo "environment=staging" >> $GITHUB_OUTPUT
+            else
+              # Feature branches - usar preview
+              BRANCH_NAME="${{ github.ref_name }}"
+              echo "subdomain=preview-${BRANCH_NAME}.shifrastudio.com.ar" >> $GITHUB_OUTPUT
+              echo "server_dir=/public_html/preview/${BRANCH_NAME}/" >> $GITHUB_OUTPUT
+              echo "environment=preview" >> $GITHUB_OUTPUT
+            fi
+          fi
+          
+          echo "🌍 Environment: $(echo ${{ steps.config.outputs.environment }})"
+          echo "🌐 Subdomain: $(echo ${{ steps.config.outputs.subdomain }})"
+          echo "📁 Directory: $(echo ${{ steps.config.outputs.server_dir }})"
+
+      - name: Get FTP credentials
+        id: ftp
+        run: |
+          ENV_UPPER=$(echo "${{ steps.config.outputs.environment }}" | tr '[:lower:]' '[:upper:]')
+          
+          # Usar secrets genéricos o específicos por ambiente
+          if [ "${{ secrets.FTP_SERVER }}" != "" ]; then
+            # Si hay secret genérico, usarlo
+            echo "server=${{ secrets.FTP_SERVER }}" >> $GITHUB_OUTPUT
+            echo "username=${{ secrets.FTP_USERNAME }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.FTP_PASSWORD }}" >> $GITHUB_OUTPUT
+          else
+            # Si no, usar secrets específicos por ambiente
+            echo "server=\${{ secrets.FTP_SERVER_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
+            echo "username=\${{ secrets.FTP_USERNAME_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
+            echo "password=\${{ secrets.FTP_PASSWORD_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verify FTP Secrets
+        run: |
+          SERVER_TEST="${{ steps.ftp.outputs.server }}"
+          USERNAME_TEST="${{ steps.ftp.outputs.username }}"
+          PASSWORD_TEST="${{ steps.ftp.outputs.password }}"
+          
+          if [ -z "${SERVER_TEST}" ]; then
+            echo "❌ Error: FTP_SERVER secret is not configured"
+            exit 1
+          fi
+          
+          if [ -z "${USERNAME_TEST}" ]; then
+            echo "❌ Error: FTP_USERNAME secret is not configured"
+            exit 1
+          fi
+          
+          if [ -z "${PASSWORD_TEST}" ]; then
+            echo "❌ Error: FTP_PASSWORD secret is not configured"
+            exit 1
+          fi
+          
+          echo "✅ All FTP secrets are configured"
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ steps.ftp.outputs.server }}
+          username: ${{ steps.ftp.outputs.username }}
+          password: ${{ steps.ftp.outputs.password }}
+          port: 9021
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ${{ steps.config.outputs.server_dir }}
+          timeout: 600000
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/Thumbs.db
+
+      - name: Deployment Summary
+        run: |
+          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment:** ${{ steps.config.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Subdomain:** ${{ steps.config.outputs.subdomain }}" >> $GITHUB_OUTPUT
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Server Directory:** ${{ steps.config.outputs.server_dir }}" >> $GITHUB_STEP_SUMMARY
