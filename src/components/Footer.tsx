@@ -1,7 +1,6 @@
 import { Instagram, Facebook } from "lucide-react";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-
-const WHATSAPP_NUMBER = "5491112345678";
+import { whatsappUrls } from "@/config/whatsapp";
 
 export const Footer = () => {
   return (
@@ -19,7 +18,7 @@ export const Footer = () => {
 
           <div className="flex items-center gap-6">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              href={whatsappUrls.default}
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center 

@@ -1,4 +1,6 @@
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+import { whatsappUrls } from "@/config/whatsapp";
+import { OptimizedImage } from "./OptimizedImage";
 
 export interface Product {
   id: string;
@@ -13,20 +15,17 @@ interface ProductCardProps {
   product: Product;
 }
 
-const WHATSAPP_NUMBER = "5491112345678";
-
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const message = encodeURIComponent(`¡Hola! Me interesa consultar sobre: ${product.name}`);
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  const whatsappUrl = whatsappUrls.product(product.name);
 
   return (
     <article className="product-card group">
       <div className="aspect-square overflow-hidden bg-muted">
-        <img
+        <OptimizedImage
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          showSkeleton={true}
         />
       </div>
 
@@ -54,7 +53,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-whatsapp-outline text-sm px-4 py-2"
+            className="btn-whatsapp-outline text-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label={`Consultar sobre ${product.name} por WhatsApp`}
           >
             <WhatsAppIcon className="w-4 h-4" />
             Consultar
