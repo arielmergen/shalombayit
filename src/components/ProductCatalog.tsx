@@ -99,14 +99,14 @@ export const ProductCatalog = ({
             role="region"
             aria-label="Lista de productos"
           >
-          {filteredProducts.map((product, index) => (
+            {filteredProducts.map((product, index) => (
               <ProductCardWrapper
-              key={product.id}
+                key={product.id}
                 product={product}
                 index={index}
               />
-          ))}
-        </div>
+            ))}
+          </div>
         )}
       </div>
     </section>

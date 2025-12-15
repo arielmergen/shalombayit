@@ -1,7 +1,8 @@
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-import heroImage from "@/assets/hero-food.jpg";
+import heroImage from "@/assets/hero-food.png";
 import { whatsappUrls } from "@/config/whatsapp";
 import { OptimizedImage } from "./OptimizedImage";
+import logo from "@/assets/shalom-bayit.jpeg";
 
 export const Hero = () => {
 
@@ -21,6 +22,7 @@ export const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container text-center text-white px-4 pt-20 pb-24 md:pb-20">
+        <img src={logo} alt="Shalom Bayit" className="w-32 h-32 mx-auto mb-6" />
         <h1 
           className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight opacity-0 animate-fade-in"
           style={{ animationDelay: "0.2s" }}

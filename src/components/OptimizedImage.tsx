@@ -20,6 +20,7 @@ interface OptimizedImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElem
 export const OptimizedImage = ({
   src,
   alt,
+  className,
   fallbackSrc = "/placeholder.svg",
   showSkeleton = true,
   priority = false,

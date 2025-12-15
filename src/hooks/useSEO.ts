@@ -10,30 +10,20 @@ export interface SEOData {
   ogImage?: string;
   ogType?: string;
   ogUrl?: string;
-  twitterCard?: string;
-  twitterSite?: string;
-  twitterTitle?: string;
-  twitterDescription?: string;
-  twitterImage?: string;
   canonicalUrl?: string;
   structuredData?: object;
 }
 
 const DEFAULT_SEO: Required<SEOData> = {
-  title: "Sabores - Pizzas y Sándwiches Artesanales",
+  title: "Shalom Bayit - Pizzas y Sándwiches Artesanales",
   description: "Pizzas artesanales y sándwiches de miga para tus momentos especiales. Consultá nuestro catálogo y hacé tu pedido por WhatsApp.",
   keywords: "pizzas, sándwiches de miga, comida artesanal, delivery, pedidos por WhatsApp",
-  author: "Sabores",
-  ogTitle: "Sabores - Pizzas y Sándwiches Artesanales",
+  author: "Shalom Bayit",
+  ogTitle: "Shalom Bayit - Pizzas y Sándwiches Artesanales",
   ogDescription: "Pizzas artesanales y sándwiches de miga para tus momentos especiales. Consultá nuestro catálogo y hacé tu pedido por WhatsApp.",
   ogImage: "/hero-food.jpg",
   ogType: "website",
   ogUrl: "",
-  twitterCard: "summary_large_image",
-  twitterSite: "@sabores",
-  twitterTitle: "Sabores - Pizzas y Sándwiches Artesanales",
-  twitterDescription: "Pizzas artesanales y sándwiches de miga para tus momentos especiales.",
-  twitterImage: "/hero-food.jpg",
   canonicalUrl: "",
   structuredData: {},
 };

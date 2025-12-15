@@ -54,11 +54,14 @@ npm run dev
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
+- Vite 5.4.19
+- TypeScript 5.8.3
+- React 19.2.3
+- React DOM 19.2.3
+- shadcn-ui (Radix UI components)
 - Tailwind CSS
+- React Router DOM 6.30.1
+- TanStack Query 5.90.12
 
 ## How can I deploy this project?
 

@@ -1,6 +1,7 @@
 import { Product } from "@/components/ProductCard";
 
 // Import product images
+<<<<<<< HEAD
 import pizzaMozzarella from "@/assets/pizza-mozzarella.jpg";
 import pizzaNapolitana from "@/assets/pizza-napolitana.jpg";
 import pizzaFugazzeta from "@/assets/pizza-fugazzeta.jpg";
@@ -9,6 +10,15 @@ import migaJamon from "@/assets/miga-jamon.jpg";
 import migaAtun from "@/assets/miga-atun.jpg";
 import migaPollo from "@/assets/miga-pollo.jpg";
 import migaMixto from "@/assets/miga-mixto.jpg";
+=======
+import pizzaVariadas from "@/assets/prepizzas-variadas.jpeg";
+import pizzaFugazzeta from "@/assets/fugazzeta.jpeg";
+import migaJamon from "@/assets/miga-jamon-queso.jpeg";
+import migahuevo from "@/assets/miga-huevo.jpeg";
+import chips from "@/assets/chips.jpeg";
+import fosforitos from "@/assets/fosforito.jpeg";
+import matambre from "@/assets/matambre.png";
+>>>>>>> upgrade/react-19
 
 /**
  * Catálogo de productos
@@ -18,6 +28,7 @@ import migaMixto from "@/assets/miga-mixto.jpg";
 export const products: Product[] = [
   {
     id: "1",
+<<<<<<< HEAD
     name: "Pizza Mozzarella",
     category: "Pizzas",
     image: pizzaMozzarella,
@@ -78,6 +89,54 @@ export const products: Product[] = [
     category: "Miga",
     image: migaMixto,
     attribute: "24 unidades • Variados",
+=======
+    name: "Prepizzas Variadas",
+    category: "Pizzas",
+    image: pizzaVariadas,
+    attribute: "Clásica • Grande • Chicas",
+  },
+  {
+    id: "2",
+    name: "Pizza Fugazzeta",
+    category: "Pizzas",
+    image: pizzaFugazzeta,
+    attribute: "Grande",
+  },
+  {
+    id: "3",
+    name: "Sándwiches de jamón y queso",
+    category: "Miga",
+    image: migaJamon,
+    attribute: "Docena • Clásicos",
+  },
+  {
+    id: "4",
+    name: "Sándwiches de jamón y huevo",
+    category: "Miga",
+    image: migahuevo,
+    attribute: "Docena • Jamón y Huevo",
+  },
+  {
+    id: "5",
+    name: "Chips",
+    category: "chips",
+    image: chips,
+    attribute: "Chips",
+  },
+  {
+    id: "6",
+    name: "Fosforito",
+    category: "fosforito",
+    image: fosforitos,
+    attribute: "Fosforito",
+  },
+  {
+    id: "7",
+    name: "Matambre",
+    category: "matambre",
+    image: matambre,
+    attribute: "matambre",
+>>>>>>> upgrade/react-19
   },
 ];
 

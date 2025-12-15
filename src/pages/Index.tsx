@@ -33,18 +33,18 @@ const Index = () => {
 
   return (
     <CatalogProvider>
-    <div className="min-h-screen">
+      <div className="min-h-screen">
         <SkipToContent />
-      <Header />
+        <Header />
         <main id="main-content">
-        <Hero />
-        <ProductCatalog />
-        <TrustBlock />
-        <FinalCTA />
-      </main>
-      <Footer />
-      <FloatingWhatsApp />
-    </div>
+          <Hero />
+          <ProductCatalog />
+          <TrustBlock />
+          <FinalCTA />
+        </main>
+        <Footer />
+        <FloatingWhatsApp />
+      </div>
     </CatalogProvider>
   );
 };

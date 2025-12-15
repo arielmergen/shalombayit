@@ -33,7 +33,7 @@ export const Header = () => {
           className="font-display text-2xl md:text-3xl font-bold text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm"
           aria-label="Sabores - Ir al inicio"
         >
-          Sabores<span className="text-primary">.</span>
+         Shalom Bayit
         </a>
 
         {/* Desktop Navigation */}
@@ -58,16 +58,16 @@ export const Header = () => {
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-3">
-        <a
+          <a
             href={whatsappUrls.default}
-          target="_blank"
-          rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-whatsapp text-sm px-4 py-2"
             aria-label="Consultar por WhatsApp"
-        >
-          <WhatsAppIcon className="w-4 h-4" />
+          >
+            <WhatsAppIcon className="w-4 h-4" />
             <span className="sr-only">WhatsApp</span>
-        </a>
+          </a>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
