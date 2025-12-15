@@ -1,10 +1,7 @@
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
-
-const WHATSAPP_NUMBER = "5491112345678";
-const WHATSAPP_MESSAGE = encodeURIComponent("¡Hola! Quiero hacer un pedido.");
+import { whatsappUrls } from "@/config/whatsapp";
 
 export const FinalCTA = () => {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
   return (
     <section className="py-20 md:py-28 bg-gradient-to-br from-primary/5 via-background to-primary/10">
@@ -17,10 +14,11 @@ export const FinalCTA = () => {
         </p>
 
         <a
-          href={whatsappUrl}
+          href={whatsappUrls.order}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-whatsapp text-lg px-10 py-5 inline-flex"
+          className="btn-whatsapp text-lg px-10 py-5 inline-flex focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          aria-label="Pedir por WhatsApp"
         >
           <WhatsAppIcon className="w-6 h-6" />
           Pedir por WhatsApp
