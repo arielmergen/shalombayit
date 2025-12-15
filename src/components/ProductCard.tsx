@@ -7,7 +7,7 @@ export interface Product {
   name: string;
   category: string;
   image: string;
-  attribute?: string;
+  attribute?: string[];
   price?: number;
 }
 
@@ -34,10 +34,17 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </h3>
 
-        {product.attribute && (
-          <p className="text-sm text-muted-foreground mb-3">
-            {product.attribute}
-          </p>
+        {product.attribute && product.attribute.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {product.attribute.map((attr, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20"
+              >
+                {attr}
+              </span>
+            ))}
+          </div>
         )}
 
         <div className="flex items-center justify-between gap-3 mt-4">

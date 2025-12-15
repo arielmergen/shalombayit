@@ -74,13 +74,11 @@ export const OptimizedImage = ({
     setHasError(true);
   };
 
-  // Separar las props del img de las props del contenedor
-  const { className: imgClassName, ...imgProps } = props;
 
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden w-full h-full"
+      className="relative overflow-hidden w-full h-full aspect-[1/1]"
     >
       {showSkeleton && isLoading && shouldLoad && (
         <Skeleton className="absolute inset-0 w-full h-full" />
@@ -93,12 +91,12 @@ export const OptimizedImage = ({
           className={cn(
             "w-full h-full transition-opacity duration-300",
             isLoading ? "opacity-0" : "opacity-100",
-            imgClassName
+            className
           )}
           loading={priority ? "eager" : "lazy"}
           onLoad={handleLoad}
           onError={handleError}
-          {...imgProps}
+          {...props}
         />
       )}
       
