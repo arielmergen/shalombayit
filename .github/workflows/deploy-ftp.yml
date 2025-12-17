@@ -81,19 +81,29 @@ jobs:
       - name: Get FTP credentials
         id: ftp
         run: |
-          ENV_UPPER=$(echo "${{ steps.config.outputs.environment }}" | tr '[:lower:]' '[:upper:]')
+          ENV="${{ steps.config.outputs.environment }}"
           
-          # Usar secrets genéricos o específicos por ambiente
+          # Usar secrets genéricos (recomendado) o específicos por ambiente
           if [ "${{ secrets.FTP_SERVER }}" != "" ]; then
             # Si hay secret genérico, usarlo
             echo "server=${{ secrets.FTP_SERVER }}" >> $GITHUB_OUTPUT
             echo "username=${{ secrets.FTP_USERNAME }}" >> $GITHUB_OUTPUT
             echo "password=${{ secrets.FTP_PASSWORD }}" >> $GITHUB_OUTPUT
+          elif [ "${ENV}" == "production" ]; then
+            # Secrets específicos para producción
+            echo "server=${{ secrets.FTP_SERVER_PRODUCTION }}" >> $GITHUB_OUTPUT
+            echo "username=${{ secrets.FTP_USERNAME_PRODUCTION }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.FTP_PASSWORD_PRODUCTION }}" >> $GITHUB_OUTPUT
+          elif [ "${ENV}" == "staging" ]; then
+            # Secrets específicos para staging
+            echo "server=${{ secrets.FTP_SERVER_STAGING }}" >> $GITHUB_OUTPUT
+            echo "username=${{ secrets.FTP_USERNAME_STAGING }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.FTP_PASSWORD_STAGING }}" >> $GITHUB_OUTPUT
           else
-            # Si no, usar secrets específicos por ambiente
-            echo "server=\${{ secrets.FTP_SERVER_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
-            echo "username=\${{ secrets.FTP_USERNAME_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
-            echo "password=\${{ secrets.FTP_PASSWORD_${ENV_UPPER} }}" >> $GITHUB_OUTPUT
+            # Para preview, usar secrets genéricos o staging
+            echo "server=${{ secrets.FTP_SERVER_STAGING }}" >> $GITHUB_OUTPUT
+            echo "username=${{ secrets.FTP_USERNAME_STAGING }}" >> $GITHUB_OUTPUT
+            echo "password=${{ secrets.FTP_PASSWORD_STAGING }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Verify FTP Secrets
