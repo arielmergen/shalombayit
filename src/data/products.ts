@@ -5,7 +5,7 @@ import pizzaVariadas from "@/assets/prepizzas-variadas.jpeg";
 import pizzaFugazzeta from "@/assets/fugazzeta.jpeg";
 import migahuevo from "@/assets/miga-huevo.jpeg";
 import especialesTriple from "@/assets/shanwich-de-miga-especiales.png";
-import miganegro from "@/assets/sanguches-de-miga.jpeg";
+import miganegro from "@/assets/sandwich-de-miga-negro.png";
 import chips from "@/assets/chips.jpeg";
 import fosforitos from "@/assets/fosforito.jpeg";
 import matambre from "@/assets/matambre.png";
@@ -26,7 +26,7 @@ export const products: Product[] = [
   },
   {
     id: "2",
-    name: "Pizza Fugazzeta",
+    name: "Prepizza de Fugazzeta",
     category: "Pizzas",
     image: pizzaFugazzeta,
     attribute: ["Grande, Pizzetas"],
@@ -60,7 +60,7 @@ export const products: Product[] = [
   {
     id: "5",
     name: "Sandwich de miga pan negro:",
-    category: "miga",
+    category: "Miga",
     image: miganegro,
     attribute: ["crudo y queso", "curdo y rucula"],
   },

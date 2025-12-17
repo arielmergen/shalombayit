@@ -42,10 +42,16 @@ export const ProductCatalog = ({
   }, [productsData]);
 
   const filteredProducts = useMemo(() => {
-    if (activeCategory === ALL_CATEGORY) {
-      return productsData;
-    }
-    return productsData.filter((p) => p.category === activeCategory);
+    let result = activeCategory === ALL_CATEGORY
+      ? productsData
+      : productsData.filter((p) => p.category === activeCategory);
+    
+    // Ordenar por categoría (y luego por nombre dentro de cada categoría)
+    return result.sort((a, b) => {
+      const categoryCompare = a.category.localeCompare(b.category, 'es', { sensitivity: 'base' });
+      if (categoryCompare !== 0) return categoryCompare;
+      return a.name.localeCompare(b.name, 'es', { sensitivity: 'base' });
+    });
   }, [activeCategory, productsData]);
 
   const productCount = filteredProducts.length;
