@@ -15,4 +15,17 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Asegurar que los archivos tengan hash para invalidar caché
+    // Vite ya genera hashes automáticamente, esto asegura que siempre los use
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/[name]-[hash].js",
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
+      },
+    },
+    // Generar manifest para tracking de versiones
+    manifest: true,
+  },
 }));
