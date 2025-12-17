@@ -52,31 +52,38 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             # Manual deployment - usar inputs
+            SERVER_DIR="${{ github.event.inputs.server_dir }}"
             echo "subdomain=${{ github.event.inputs.subdomain }}" >> $GITHUB_OUTPUT
-            echo "server_dir=${{ github.event.inputs.server_dir }}" >> $GITHUB_OUTPUT
             echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
           else
             # Auto deployment - usar mapeo por rama
             if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+              SERVER_DIR="${{ secrets.FTP_SERVER_DIR_PRODUCTION }}"
               echo "subdomain=${{ secrets.SUBDOMAIN_PRODUCTION }}" >> $GITHUB_OUTPUT
-              echo "server_dir=${{ secrets.FTP_SERVER_DIR_PRODUCTION }}" >> $GITHUB_OUTPUT
               echo "environment=production" >> $GITHUB_OUTPUT
             elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+              SERVER_DIR="${{ secrets.FTP_SERVER_DIR_STAGING }}"
               echo "subdomain=${{ secrets.SUBDOMAIN_STAGING }}" >> $GITHUB_OUTPUT
-              echo "server_dir=${{ secrets.FTP_SERVER_DIR_STAGING }}" >> $GITHUB_OUTPUT
               echo "environment=staging" >> $GITHUB_OUTPUT
             else
               # Feature branches - usar preview
               BRANCH_NAME="${{ github.ref_name }}"
+              SERVER_DIR="/public_html/preview/${BRANCH_NAME}/"
               echo "subdomain=preview-${BRANCH_NAME}.shifrastudio.com.ar" >> $GITHUB_OUTPUT
-              echo "server_dir=/public_html/preview/${BRANCH_NAME}/" >> $GITHUB_OUTPUT
               echo "environment=preview" >> $GITHUB_OUTPUT
             fi
           fi
           
+          # Normalizar server_dir: asegurar que termine con /
+          if [ -n "${SERVER_DIR}" ] && [ "${SERVER_DIR: -1}" != "/" ]; then
+            SERVER_DIR="${SERVER_DIR}/"
+          fi
+          
+          echo "server_dir=${SERVER_DIR}" >> $GITHUB_OUTPUT
+          
           echo "🌍 Environment: $(echo ${{ steps.config.outputs.environment }})"
           echo "🌐 Subdomain: $(echo ${{ steps.config.outputs.subdomain }})"
-          echo "📁 Directory: $(echo ${{ steps.config.outputs.server_dir }})"
+          echo "📁 Directory: ${SERVER_DIR}"
 
       - name: Get FTP credentials
         id: ftp
