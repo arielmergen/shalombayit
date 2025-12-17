@@ -10,14 +10,6 @@ interface MenuItemProps {
 }
 
 export const MenuItem = ({ item, showImage = true }: MenuItemProps) => {
-  const formatPrice = (amount: number) => {
-    return new Intl.NumberFormat("es-AR", {
-      style: "currency",
-      currency: "ARS",
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
-
   const buildWhatsAppMessage = (item: MenuItemType, variant?: MenuVariant, priceLabel?: string) => {
     let message = `Hola! Me interesa: ${item.name}`;
     if (item.description) message += ` (${item.description})`;
@@ -29,36 +21,49 @@ export const MenuItem = ({ item, showImage = true }: MenuItemProps) => {
   const renderPrices = (prices: MenuItemType["prices"], variant?: MenuVariant) => {
     if (!prices || prices.length === 0) return null;
 
+    const hasMultiplePrices = prices.length > 1;
+
     return (
       <div className="flex flex-col gap-2">
-        {prices.map((price, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between gap-4 py-2 border-b border-border/50 last:border-0"
-          >
-            <div className="flex-1">
-              {price.label && (
-                <span className="text-sm text-muted-foreground font-medium">
-                  {price.label}
-                </span>
+        {prices.map((price, index) => {
+          const hasLabel = !!price.label;
+          const displayText = price.actionText || "Hacé tu pedido";
+
+          return (
+            <div
+              key={index}
+              className={cn(
+                "flex items-center justify-between gap-4 py-2",
+                hasMultiplePrices && "border-b border-border/50 last:border-0"
               )}
+            >
+              {hasLabel ? (
+                <div className="flex-1">
+                  <span className="text-sm text-muted-foreground font-medium">
+                    {price.label}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex-1" /> // Espaciador cuando no hay label
+              )}
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground italic">
+                  {displayText}
+                </span>
+                <a
+                  href={whatsappUrls.custom(buildWhatsAppMessage(item, variant, price.label))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp text-white text-xs px-3 py-1.5 shrink-0 flex items-center gap-1.5 rounded-full transition-colors"
+                  aria-label={`Consultar ${item.name}${price.label ? ` ${price.label}` : ""} por WhatsApp`}
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5" />
+                  <span className="text-xs font-medium">Consultar</span>
+                </a>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="font-display text-lg font-bold text-primary">
-                {formatPrice(price.amount)}
-              </span>
-              <a
-                href={whatsappUrls.custom(buildWhatsAppMessage(item, variant, price.label))}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp-outline text-xs px-3 py-1.5 shrink-0"
-                aria-label={`Consultar ${item.name} ${price.label || ""} por WhatsApp`}
-              >
-                <WhatsAppIcon className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   };

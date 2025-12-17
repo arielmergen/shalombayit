@@ -9,8 +9,8 @@
  */
 
 export interface MenuPrice {
-  label: string; // "Sin papas", "Con papas", "Cada una", "Media docena", "Docena"
-  amount: number;
+  label?: string; // Opcional: "Sin papas", "Con papas", "Cada una", "Media docena", "Docena"
+  actionText?: string; // Texto a mostrar (ej: "Hacé tu pedido")
 }
 
 export interface MenuVariant {
@@ -61,8 +61,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan y carne",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 5200 },
-          { label: "Con papas", amount: 7200 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 1,
       },
@@ -72,8 +72,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan, Carne, Lechuga y Tomate",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 5800 },
-          { label: "Con papas", amount: 7800 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 2,
       },
@@ -83,8 +83,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan, Carne, Lechuga, Tomate, Jamón y queso",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 6000 },
-          { label: "Con papas", amount: 8000 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 3,
       },
@@ -94,8 +94,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan y Pollo",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 4500 },
-          { label: "Con papas", amount: 6500 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 4,
       },
@@ -105,8 +105,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan, Pollo, Lechuga y Tomate",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 5000 },
-          { label: "Con papas", amount: 7000 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 5,
       },
@@ -116,8 +116,8 @@ export const menuSections: MenuSection[] = [
         description: "Pan, Pollo, Lechuga, Tomate, Jamón y queso",
         category: "SANDWICHES DE MILANESA",
         prices: [
-          { label: "Sin papas", amount: 5500 },
-          { label: "Con papas", amount: 7500 },
+          { label: "Sin papas", actionText: "Hacé tu pedido" },
+          { label: "Con papas", actionText: "Hacé tu pedido" },
         ],
         order: 6,
       },
@@ -133,7 +133,7 @@ export const menuSections: MenuSection[] = [
         name: "TORTILLA DE PAPAS",
         category: "OTROS PLATOS",
         groupName: "TORTILLAS INDIVIDUALES",
-        prices: [{ label: "", amount: 7500 }],
+        prices: [{ actionText: "Hacé tu pedido" }],
         order: 1,
       },
       {
@@ -141,7 +141,7 @@ export const menuSections: MenuSection[] = [
         name: "TORTILLA DE VERDURAS",
         category: "OTROS PLATOS",
         groupName: "TORTILLAS INDIVIDUALES",
-        prices: [{ label: "", amount: 7500 }],
+        prices: [{ actionText: "Hacé tu pedido" }],
         order: 2,
       },
       {
@@ -153,12 +153,12 @@ export const menuSections: MenuSection[] = [
           {
             id: "chicas",
             name: "CHICAS",
-            prices: [{ label: "", amount: 3000 }],
+            prices: [{ actionText: "Hacé tu pedido" }],
           },
           {
             id: "grandes",
             name: "GRANDES",
-            prices: [{ label: "", amount: 5000 }],
+            prices: [{ actionText: "Hacé tu pedido" }],
           },
         ],
         order: 3,
@@ -167,14 +167,14 @@ export const menuSections: MenuSection[] = [
         id: "pizza-muzzarella",
         name: "PIZZA MUZZARELLA",
         category: "OTROS PLATOS",
-        prices: [{ label: "", amount: 10000 }],
+        prices: [{ actionText: "Hacé tu pedido" }],
         order: 4,
       },
       {
         id: "pizza-jamon",
         name: "PIZZA JAMON",
         category: "OTROS PLATOS",
-        prices: [{ label: "", amount: 13000 }],
+        prices: [{ actionText: "Hacé tu pedido" }],
         order: 5,
       },
     ],
@@ -194,27 +194,27 @@ export const menuSections: MenuSection[] = [
             id: "carne",
             name: "Carne",
             prices: [
-              { label: "Cada una", amount: 2300 },
-              { label: "Media docena", amount: 13000 },
-              { label: "Docena", amount: 23000 },
+              { label: "Cada una", actionText: "Hacé tu pedido" },
+              { label: "Media docena", actionText: "Hacé tu pedido" },
+              { label: "Docena", actionText: "Hacé tu pedido" },
             ],
           },
           {
             id: "pollo",
             name: "Pollo",
             prices: [
-              { label: "Cada una", amount: 2300 },
-              { label: "Media docena", amount: 13000 },
-              { label: "Docena", amount: 23000 },
+              { label: "Cada una", actionText: "Hacé tu pedido" },
+              { label: "Media docena", actionText: "Hacé tu pedido" },
+              { label: "Docena", actionText: "Hacé tu pedido" },
             ],
           },
           {
             id: "j-y-queso",
             name: "J y Queso",
             prices: [
-              { label: "Cada una", amount: 2300 },
-              { label: "Media docena", amount: 13000 },
-              { label: "Docena", amount: 23000 },
+              { label: "Cada una", actionText: "Hacé tu pedido" },
+              { label: "Media docena", actionText: "Hacé tu pedido" },
+              { label: "Docena", actionText: "Hacé tu pedido" },
             ],
           },
         ],
