@@ -157,8 +157,13 @@ jobs:
 
       - name: Deployment Summary
         run: |
-          echo "## 🚀 Deployment Complete" >> $GITHUB_STEP_SUMMARY
-          echo "- **Environment:** ${{ steps.config.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Subdomain:** ${{ steps.config.outputs.subdomain }}" >> $GITHUB_OUTPUT
-          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Server Directory:** ${{ steps.config.outputs.server_dir }}" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## 🚀 Deployment Complete"
+            echo ""
+            echo "- **Environment:** ${{ steps.config.outputs.environment }}"
+            echo "- **Subdomain:** ${{ steps.config.outputs.subdomain }}"
+            echo "- **Branch:** ${{ github.ref_name }}"
+            echo "- **Server Directory:** ${{ steps.config.outputs.server_dir }}"
+            echo "- **Commit:** ${{ github.sha }}"
+            echo "- **Deployed by:** ${{ github.actor }}"
+          } >> $GITHUB_STEP_SUMMARY
