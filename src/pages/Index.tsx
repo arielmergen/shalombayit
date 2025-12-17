@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ProductCatalog } from "@/components/ProductCatalog";
+import { Menu } from "@/components/Menu";
 import { TrustBlock } from "@/components/TrustBlock";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
@@ -39,6 +40,7 @@ const Index = () => {
         <main id="main-content">
           <Hero />
           <ProductCatalog />
+          <Menu />
           <TrustBlock />
           <FinalCTA />
         </main>

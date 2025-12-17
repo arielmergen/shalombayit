@@ -31,5 +31,6 @@ export const whatsappUrls = {
   inquiry: getWhatsAppUrl(WHATSAPP_CONFIG.messages.inquiry),
   product: (productName: string) => 
     getWhatsAppUrl(WHATSAPP_CONFIG.messages.product(productName)),
+  custom: (message: string) => getWhatsAppUrl(message),
 };
 
