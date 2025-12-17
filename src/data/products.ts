@@ -50,6 +50,7 @@ export const products: Product[] = [
     image: especialesTriple,
     attribute: [
       "jamón y morron",
+      "jamón y aceitunas",
       "jamón y roquefort",
       "jamón y palmitos",
       "jamón y pavita",
