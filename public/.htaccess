@@ -1,27 +1,54 @@
-# Configuración de caché para invalidar versiones antiguas
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  
+  # Permitir acceso directo a archivos y directorios que existen
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  
+  # Redirigir todas las rutas a index.html para React Router
+  RewriteRule ^(.*)$ index.html [L,QSA]
+</IfModule>
+
+# Headers de seguridad y performance
 <IfModule mod_headers.c>
-  # No cachear el HTML principal
+  # ClickJacking Protection
+  Header always set X-Frame-Options "SAMEORIGIN"
+  
+  # Prevenir Content Type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+  
+  # Strict Transport Security (HSTS) - Solo si tienes HTTPS
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  
+  # Content Security Policy
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-src 'none'; object-src 'none'; base-uri 'self';"
+  
+  # Referrer Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Permissions Policy
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  
+  # Cache para assets estáticos
+  <FilesMatch "\.(ico|jpg|jpeg|png|gif|svg|webp|css|js|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+  
+  # No cache para HTML
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
-    Header set Expires "0"
-  </FilesMatch>
-  
-  # Cachear assets con hash por 1 año (los nombres cambian en cada build)
-  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
-  </FilesMatch>
-  
-  # No cachear version.json para verificar actualizaciones
-  <FilesMatch "version\.json$">
-    Header set Cache-Control "no-cache, no-store, must-revalidate"
-    Header set Pragma "no-cache"
-    Header set Expires "0"
+    Header set Expires 0
   </FilesMatch>
 </IfModule>
 
-# Compresión
+# Compresión GZIP
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 </IfModule>
 
+# Prevenir acceso a archivos sensibles
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
