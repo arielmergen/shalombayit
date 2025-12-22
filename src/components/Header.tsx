@@ -44,6 +44,12 @@ export const Header = () => {
           >
             Catálogo
           </a>
+          <a 
+            href="#menu" 
+            className="text-muted-foreground hover:text-foreground transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm"
+          >
+            Menú
+          </a>
           <a
             href={whatsappUrls.default}
             target="_blank"
@@ -83,30 +89,57 @@ export const Header = () => {
               <div className="flex flex-col h-full">
                 {/* Título */}
                 <h2 className="text-2xl font-display font-bold text-foreground mb-6 mt-4">
-                  Catálogo
+                  Navegación
                 </h2>
                 
-                {/* Items del catálogo */}
-                <nav className="flex flex-col gap-2 flex-1 mb-6" aria-label="Navegación móvil">
+                {/* Links principales */}
+                <nav className="flex flex-col gap-2 mb-6" aria-label="Navegación móvil">
                   <SheetClose asChild>
-                    <button
-                      onClick={() => handleLinkClick("Todos")}
+                    <a
+                      href="#catalogo"
+                      onClick={() => setIsOpen(false)}
                       className="text-base font-medium text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm py-2 px-2 text-left"
                     >
-                      Ver todos
-                    </button>
+                      Catálogo
+                    </a>
                   </SheetClose>
-                  {categories.map((category) => (
-                    <SheetClose key={category} asChild>
+                  <SheetClose asChild>
+                    <a
+                      href="#menu"
+                      onClick={() => setIsOpen(false)}
+                      className="text-base font-medium text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm py-2 px-2 text-left"
+                    >
+                      Menú
+                    </a>
+                  </SheetClose>
+                </nav>
+
+                {/* Items del catálogo */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                    Categorías
+                  </h3>
+                  <nav className="flex flex-col gap-2" aria-label="Categorías del catálogo">
+                    <SheetClose asChild>
                       <button
-                        onClick={() => handleLinkClick(category)}
+                        onClick={() => handleLinkClick("Todos")}
                         className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm py-2 px-2 text-left"
                       >
-                        {category}
+                        Ver todos
                       </button>
                     </SheetClose>
-                  ))}
-                </nav>
+                    {categories.map((category) => (
+                      <SheetClose key={category} asChild>
+                        <button
+                          onClick={() => handleLinkClick(category)}
+                          className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm py-2 px-2 text-left"
+                        >
+                          {category}
+                        </button>
+                      </SheetClose>
+                    ))}
+                  </nav>
+                </div>
 
                 {/* Botón de WhatsApp (outline blanco) */}
                 <SheetClose asChild>
