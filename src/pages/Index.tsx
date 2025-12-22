@@ -13,22 +13,23 @@ import { useSEO } from "@/hooks/useSEO";
 const Index = () => {
   // Configurar SEO para la página principal
   useSEO({
-    title: "Sabores - Pizzas y Sándwiches Artesanales",
+    title: "Shalom Bayit - Pizzas y Sándwiches Artesanales",
     description: "Pizzas artesanales y sándwiches de miga para tus momentos especiales. Consultá nuestro catálogo y hacé tu pedido por WhatsApp.",
     keywords: "pizzas, sándwiches de miga, comida artesanal, delivery, pedidos por WhatsApp, pizzas a domicilio",
-    ogTitle: "Sabores - Pizzas y Sándwiches Artesanales",
+    ogTitle: "Shalom Bayit - Pizzas y Sándwiches Artesanales",
     ogDescription: "Pizzas artesanales y sándwiches de miga para tus momentos especiales. Consultá nuestro catálogo y hacé tu pedido por WhatsApp.",
-    ogImage: "/hero-food.jpg",
+    ogImage: "https://www.shalombayit.shifrastudio.com.ar/hero-food.png",
     ogType: "website",
-    ogUrl: typeof window !== "undefined" ? window.location.href : "",
-    canonicalUrl: typeof window !== "undefined" ? window.location.href : "",
+    ogUrl: typeof window !== "undefined" ? window.location.href : "https://www.shalombayit.shifrastudio.com.ar/",
+    canonicalUrl: typeof window !== "undefined" ? window.location.href : "https://www.shalombayit.shifrastudio.com.ar/",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "FoodEstablishment",
-      "name": "Sabores",
-      "description": "Pizzas artesanales y sándwiches de miga",
+      "name": "Shalom Bayit",
+      "description": "Pizzas artesanales y sándwiches de miga para tus momentos especiales",
       "servesCuisine": "Pizza, Sándwiches",
       "priceRange": "$$",
+      "url": "https://www.shalombayit.shifrastudio.com.ar/",
     },
   });
 
