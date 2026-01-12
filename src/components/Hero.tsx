@@ -63,12 +63,12 @@ export const Hero = () => {
             Ver catálogo
           </a>
         </div>
-      </div>
 
-      {/* Scroll indicator - Ajustado para no interferir con FloatingWhatsApp */}
-      <div className="absolute bottom-20 sm:bottom-16 md:bottom-12 left-1/2 -translate-x-1/2 z-40 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2 backdrop-blur-sm">
-          <div className="w-1.5 h-3 bg-white/60 rounded-full" />
+        {/* Scroll indicator - Centrado con el contenido */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-40 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2 backdrop-blur-sm">
+            <div className="w-1.5 h-3 bg-white/60 rounded-full" />
+          </div>
         </div>
       </div>
     </section>

@@ -93,3 +93,4 @@ Antes de solicitar revisión, verifica:
 - ✅ **Espera a que los cambios estén en producción antes de solicitar revisión**
 - ✅ **Una revisión rechazada puede prolongar el proceso**
 
+
