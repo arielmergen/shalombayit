@@ -16,7 +16,8 @@ import panchurri from "@/assets/panchurri.jpeg";
 import figazzasconcarne from "@/assets/figazzas-con-carne-mechada.jpeg";
 import tortasalada2 from "@/assets/ttorta-salada2.jpeg";
 import empanadasalhorno from "@/assets/empanadas-horno.jpeg";
-
+import figazzas2 from "@/assets/figazzas.jpeg";
+import migaespeciales from "@/assets/miga-especial-lechuga.jpeg";
 /**
  * Catálogo de productos
  * Centralizado en un archivo separado para facilitar mantenimiento
@@ -136,6 +137,20 @@ export const products: Product[] = [
     category: "empanadas",
     image: empanadasalhorno,
     attribute: ["carne", "pollo", "jamón y queso"],
+  },
+  {
+    id: "16",
+    name: "Figazzas con carne mechada:",
+    category: "figazzas",
+    image: figazzas2,
+    attribute: ["bondiola", "pollo al verdeo"],
+  },
+  {
+    id: "17",
+    name: "Sandwich de miga especiales:",
+    category: "miga",
+    image: migaespeciales,
+    attribute: ["lechuga", "tomate", "huevo"],
   },
 ];
 
