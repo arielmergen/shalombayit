@@ -14,7 +14,7 @@ import tortasalada from "@/assets/torta-salada.jpeg";
 import bruschetta from "@/assets/bruschetta.jpeg";
 import panchurri from "@/assets/panchurri.jpeg";
 import figazzasconcarne from "@/assets/figazzas-con-carne-mechada.jpeg";
-import tortasalada2 from "@/assets/ttorta-salada2.jpeg";
+import tortasalada2 from "@/assets/torta-salada2.jpeg";
 import empanadasalhorno from "@/assets/empanadas-horno.jpeg";
 import figazzas2 from "@/assets/figazzas.jpeg";
 import migaespeciales from "@/assets/miga-especial-lechuga.jpeg";
