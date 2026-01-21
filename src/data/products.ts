@@ -10,6 +10,8 @@ import chips from "@/assets/chips.jpeg";
 import fosforitos from "@/assets/fosforito.jpeg";
 import matambre from "@/assets/matambre.png";
 import empanadas from "@/assets/empanadas.png";
+import tortasalada from "@/assets/torta-salada.jpeg";
+import bruschetta from "@/assets/bruschetta.jpeg";
 
 /**
  * Catálogo de productos
@@ -92,6 +94,18 @@ export const products: Product[] = [
     category: "empanadas",
     image: empanadas,
     attribute: ["carne", "pollo", "jamón y queso"],
+  },
+  {
+    id: "10",
+    name: "Torta salada",
+    category: "tortas",
+    image: tortasalada,
+  },
+  {
+    id: "11",
+    name: "Bruschettas",
+    category: "bruschettas",
+    image: bruschetta,
   },
 ];
 
