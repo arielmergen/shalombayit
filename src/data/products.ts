@@ -12,6 +12,10 @@ import matambre from "@/assets/matambre.png";
 import empanadas from "@/assets/empanadas.png";
 import tortasalada from "@/assets/torta-salada.jpeg";
 import bruschetta from "@/assets/bruschetta.jpeg";
+import panchurri from "@/assets/panchurri.jpeg";
+import figazzasconcarne from "@/assets/figazzas-con-carne-mechada.jpeg";
+import tortasalada2 from "@/assets/ttorta-salada2.jpeg";
+import empanadasalhorno from "@/assets/empanadas-horno.jpeg";
 
 /**
  * Catálogo de productos
@@ -103,9 +107,35 @@ export const products: Product[] = [
   },
   {
     id: "11",
+    name: "Torta salada",
+    category: "tortas",
+    image: tortasalada2,
+  },
+  {
+    id: "12",
     name: "Bruschettas",
     category: "bruschettas",
     image: bruschetta,
+  },
+  {
+    id: "13",
+    name: "Panchurris",
+    category: "panchurri",
+    image: panchurri
+  },
+  {
+    id: "14",
+    name: "Figazzas con carne mechada",
+    category: "figazzas",
+    image: figazzasconcarne,
+    attribute: ["bondiola", "pollo al verdeo"],
+  },
+  {
+    id: "15",
+    name: "Empanadas al horno:",
+    category: "empanadas",
+    image: empanadasalhorno,
+    attribute: ["carne", "pollo", "jamón y queso"],
   },
 ];
 
