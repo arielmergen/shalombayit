@@ -18,6 +18,7 @@ import tortasalada2 from "@/assets/torta-salada2.jpeg";
 import empanadasalhorno from "@/assets/empanadas-horno.jpeg";
 import figazzas2 from "@/assets/figazzas.jpeg";
 import migaespeciales from "@/assets/miga-especial-lechuga.jpeg";
+import minipizzas from "@/assets/mini-pizzas.jpeg";
 /**
  * Catálogo de productos
  * Centralizado en un archivo separado para facilitar mantenimiento
@@ -151,6 +152,13 @@ export const products: Product[] = [
     category: "miga",
     image: migaespeciales,
     attribute: ["lechuga", "tomate", "huevo"],
+  },
+  {
+    id: "18",
+    name: "Mini pizzas:",
+    category: "mini pizzas",
+    image: minipizzas,
+    attribute: ["jamón y tomate", "queso", "jamón"],
   },
 ];
 
